@@ -1,5 +1,5 @@
 stage 'Building nginx Container for Docker Hub'
-docker.withRegistry("https://us.gcr.io", "450fc795-b5c9-4103-9994-8fb15a0ce082") {
+docker.withRegistry("https://us.gcr.io", "gcr:450fc795-b5c9-4103-9994-8fb15a0ce082") {
 
     // Set up the container to build
     maintainer_name = "KiranYayavaram"
