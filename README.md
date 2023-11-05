@@ -6,7 +6,7 @@ docker build -f Dockerfile.gcp -t aa-nginx:latest .
 
 To Build for Azure
 ```
-docker build -f Dockerfile.gcp -t aa-nginx:latest .
+docker build -f Dockerfile.azure -t aa-nginx:latest .
 ```
 
 To Tag
