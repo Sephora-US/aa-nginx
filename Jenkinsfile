@@ -1,36 +1,18 @@
-node {
-    def app
+stage 'Building nginx Container for Docker Hub'
+docker.withRegistry("https://us.gcr.io", "450fc795-b5c9-4103-9994-8fb15a0ce082") {
 
-    stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
+    // Set up the container to build
+    maintainer_name = "KiranYayavaram"
+    container_name = "aa-nginx"
+ 
+    stage "Building Container"
+    echo "Building nginx with docker.build(${maintainer_name}/${container_name}:${build_tag})"
+    container = docker.build("${maintainer_name}/${container_name}:${build_tag}", 'nginx')
 
-        checkout scm
-    }
+    // add more tests
 
-    stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
+    stage "Pushing"
+    container.push()
 
-        app = docker.build("ykiran2023/aa-nginx")
-    }
-
-    stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
-
-    stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://us.gcr.io', '450fc795-b5c9-4103-9994-8fb15a0ce082') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
+    currentBuild.result = 'SUCCESS'
 }
