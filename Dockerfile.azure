@@ -1,0 +1,17 @@
+FROM nginx:alpine
+
+RUN apk --no-cache add curl
+
+
+WORKDIR /aa-nginx
+
+COPY ./static/azure.png ./static/cloud.png
+
+COPY . .
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+CMD ["nginx", "-g", "daemon off;"]
+
+EXPOSE 80/tcp
+

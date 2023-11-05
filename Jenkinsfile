@@ -1,3 +1,4 @@
+stages{
 stage('Build image') {
   app = docker.build("sep-poc-aa-hackathon-prj/aa-nginx")
 }
@@ -6,4 +7,5 @@ stage('Push image') {
     app.push("${env.BUILD_NUMBER}")
     app.push("latest")
   }
+}
 }
