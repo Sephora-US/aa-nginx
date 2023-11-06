@@ -7,11 +7,12 @@ WORKDIR /aa-nginx
 
 COPY ./static/azure.png ./static/cloud.png
 
+COPY ./static/akamai-sureroute-test-object.htm ./static/akamai-sureroute-test-object.htm
+
 COPY . .
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80/tcp
 
 CMD ["nginx", "-g", "daemon off;"]
-
-EXPOSE 80/tcp
 
