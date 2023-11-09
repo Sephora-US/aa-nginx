@@ -1,16 +1,23 @@
+def dockerImageNginx
+
 pipeline {
-    agent any
     
-    stages {
-      
-      stage('Build image') {
-        app = docker.build("sep-poc-aa-hackathon-prj/aa-nginx")
-      }
-      stage('Push image') {
-        docker.withRegistry('https://us.gcr.io', 'gcr:450fc795-b5c9-4103-9994-8fb15a0ce082') {
-          app.push("${env.BUILD_NUMBER}")
-          app.push("latest")
+    stage('Building image NGINX') {
+        steps{
+          script {
+            dockerImageNginx = docker build -f Dockerfile.gcp -t aa-nginx:latest .  
+          }
         }
       }
-    }
+
+    
+    stage('Push Image to registry') {
+      steps{
+        script{
+          withDockerRegistry(credentialsId: 'gcr:sep-poc-aa-hackathon-prj', url: 'http://gcr.io/sep-poc-aa-hackathon-prj/aa-gcr/') {
+            dockerImageNginx.push()
+          }
+        }
+      }
+}
 }
