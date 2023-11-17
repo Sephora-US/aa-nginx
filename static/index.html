@@ -6,8 +6,36 @@
    <meta http-equiv="Pragma" content="no-cache" />
    <meta http-equiv="Expires" content="0" />
     <title>Active-Active Hackathon!</title>
+    <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+    }
+      #iframe1 {
+        width: 50%;
+        height: 50%;
+        margin: 50px auto;
+        padding: 0;
+        float: left;
+
+    }
+    #iframe2 {
+      width: 45%;
+      height: 50%;
+      margin: 50px auto;
+      padding: 0;
+      float:right;
+
+  }
+    </style>
   </head>
   <body>
-    <h1><img src="./sephora.png" /> <img src="./arrow.png" />  <img src="./cloud.png" /></h1>
+    <h1><img src="http://api-perf1.sephora.com/images/sephora.png" /> <img src="http://api-perf1.sephora.com/images/arrow.png" />  <img src="http://api-perf1.sephora.com/images/azure.png" /></h1>
+    <iframe id="iframe1" src="http://api-perf1.sephora.com/home.html"></iframe>
+    <iframe id="iframe2" src="http://api-perf1.sephora.com/shop/category.html"></iframe>
+
   </body>
+
+
+
 </html>
